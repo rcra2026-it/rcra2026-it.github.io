@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RCRA-it 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EEEFF1;
+    --paper: #F6F7F8;
+    --ink: #14161A;
+    --muted: #6A707A;
+    --rule: #D8DBDF;
+    --accent: #7A2028;
+    --warn: #B23B2A;
+    --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Geist", ui-sans-serif, system-ui, sans-serif;
+    --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --maxw: 980px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16.5px;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ::selection { background: var(--ink); color: var(--bg); }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* ──────── NAV ──────── */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .brand {
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand:hover { text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    color: var(--ink);
+    font-size: 14.5px;
+    font-weight: 400;
+  }
+  .nav-links a:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  @media (max-width: 680px) {
+    .nav-links { gap: 18px; }
+    .nav-links a { font-size: 13.5px; }
+    .brand { font-size: 14px; }
+  }
+  @media (max-width: 480px) {
+    .nav-links a:nth-child(n+3) { display: none; }
+  }
+
+  /* ──────── HEADER ──────── */
+  header.hero {
+    position: relative;
+    color: #fff;
+    padding: 84px 0 56px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  header.hero {
+    background-color: #1A050A;
+  }
+  header.hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("hero-art.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+    filter: var(--cover-filter, none);
+  }
+  header.hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(34,10,14,0.35) 0%, rgba(34,10,14,0.55) 100%);
+    z-index: -1;
+  }
+  .hero-kicker {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 24px;
+    text-wrap: balance;
+    max-width: 28ch;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 8px 24px;
+    font-size: 14.5px;
+    color: rgba(255,255,255,0.85);
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    max-width: 720px;
+  }
+  .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-meta .sep { color: rgba(255,255,255,0.35); }
+
+  /* ──────── SECTIONS ──────── */
+  section {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  section h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 28px;
+    color: var(--ink);
+  }
+  section p { margin: 0 0 14px; max-width: 70ch; }
+  section ul { margin: 0 0 14px; padding-left: 22px; }
+  section li { margin-bottom: 4px; }
+
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+  }
+  .intro .floc {
+    text-align: right;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .intro .floc img { display: block; height: 64px; width: auto; margin-bottom: 10px; opacity: 0.95; margin-left: auto; }
+  @media (max-width: 680px) {
+    .intro { grid-template-columns: 1fr; }
+    .intro .floc { text-align: left; }
+    .intro .floc img { margin-left: 0; }
+  }
+
+  /* dates */
+  .dates {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 24px;
+    align-items: baseline;
+    max-width: 720px;
+  }
+  .dates .label { color: var(--ink); }
+  .dates .when { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 500; }
+  .dates .when del { color: var(--muted); font-weight: 400; margin-right: 6px; }
+  .dates .when .new { color: var(--warn); }
+  .dates .rowline {
+    grid-column: 1 / -1;
+    border-top: 1px dashed var(--rule);
+    margin: 0;
+  }
+  .dates .event .label { font-weight: 600; }
+  .dates .event .when { font-weight: 600; }
+
+  /* people */
+  .people {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 8px 32px;
+    margin-top: 4px;
+  }
+  .people p {
+    margin: 0;
+    padding: 6px 0;
+    font-size: 16px;
+  }
+  .people .aff { color: var(--muted); }
+
+  /* submission */
+  .submit-cta {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 12px 22px;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border: 1px solid var(--ink);
+    transition: background .15s, color .15s;
+  }
+  .submit-cta:hover {
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .note {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    margin: 8px 0 14px;
+    max-width: 70ch;
+    font-size: 15.5px;
+  }
+  .note strong { font-weight: 600; }
+
+  /* history */
+  .history-list { list-style: none; padding: 0; margin: 0; max-width: 760px; }
+  .history-list li {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 15.5px;
+  }
+  .history-list li:last-child { border-bottom: none; }
+  .history-list .year { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .history-list .desc { color: var(--ink); }
+  .history-list .desc .extra { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+
+  /* footer */
+  footer {
+    padding: 28px 0;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--ink); }
+
+  /* heading style variants (driven by Tweaks) */
+  body.head-tight h1,
+  body.head-tight h2 { letter-spacing: -0.03em; font-weight: 600; }
+  body.head-light h1,
+  body.head-light h2 { font-weight: 400; letter-spacing: -0.015em; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">RCRA-it 2026</a>
+    <div class="nav-links">
+      <a href="#dates">Important Dates</a>
+      <a href="#submission">Submission</a>
+      <a href="#proceedings">Proceedings</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header id="top" class="hero">
+  <div class="wrap">
+    <div class="hero-kicker">RCRA-it · 2026</div>
+    <h1>Italian Workshop on Experimental Evaluation of Algorithms for Solving Problems with Combinatorial Explosion</h1>
+    <div class="hero-meta">
+      <span>TBA</span>
+      <span class="sep">/</span>
+      <span>Co-located with AIxIA 2026</span>
+      <span class="sep">/</span>
+      <span>Perugia, ITALY</span>
+    </div>
+  </div>
+</header>
+
+<!-- BRIEF INTRO -->
+<section id="briefIntro">
+  <div class="wrap intro">
+    <div>
+      <p>This event follows the series of RCRA (Knowledge Representation and Automated Reasoning) annual meetings, held since 1994. The success of the previous events shows that RCRA is becoming a major forum for exchanging ideas and proposing experimentation methodologies for algorithms in Artificial Intelligence.</p>
+      <p>The workshop is co-located with <a href="https://aixia2026.unica.it/" target="_blank" rel="noopener"><strong>AIxIA 2026 — 24th International Conference of the Italian Association for Artificial Intelligence</strong></a>.</p>
+    </div>
+    <div class="floc">
+      <img src="img/aixia2026.png" alt="AIxIA 2026">
+      24th Int. Conference of the<br>Italian Association for AI
+    </div>
+  </div>
+</section>
+
+<!-- IMPORTANT DATES -->
+<section id="dates">
+  <div class="wrap">
+    <h2>Important Dates</h2>
+    <div class="dates">
+      <div class="label">Abstract submission deadline</div>
+      <div class="when">TBA</div>
+      <hr class="rowline">
+
+      <div class="label">Paper submission deadline</div>
+      <!-- <div class="when"><del>April 24</del><span class="new">May 15, 2026</span></div> -->
+      <div class="when">TBA</div>
+      <hr class="rowline">
+
+      <div class="label">Notification of acceptance</div>
+      <!-- <div class="when"><del>May 20</del><span class="new">May 29, 2026</span></div> -->
+      <div class="when">TBA</div>
+      <hr class="rowline">
+
+      <div class="label">Final version of accepted original papers</div>
+      <div class="when">TBA</div>
+      <hr class="rowline">
+
+      <div class="label event"><span class="label">RCRA-it Workshop</span></div>
+      <div class="when event">TBA</div>
+    </div>
+  </div>
+</section>
+
+<!-- AIMS AND SCOPE -->
+<section id="introSection">
+  <div class="wrap">
+    <h2>Aims and Scope</h2>
+    <p>Many problems in Artificial Intelligence show an exponential explosion of the search space. Although stemming from different research areas in AI, such problems are often addressed with algorithms that have a common goal: the effective exploration of huge state spaces. Many algorithms developed in one research area are applicable to other problems, or can be hybridized with techniques in other areas. Artificial Intelligence tools often exploit or hybridize techniques developed by other research communities, such as Operations Research. In recent years, research in Artificial Intelligence has more and more focused on experimental evaluation of algorithms, the development of suitable methodologies for experimentation and analysis, the study of languages and the implementation of systems for the definition and solution of problems.</p>
+
+    <p>The scope of the workshop is fostering the cross-fertilization of ideas stemming from different areas, proposing benchmarks for new challenging problems, comparing models and algorithms from an experimental viewpoint, and, in general, comparing different approaches regarding efficiency, problem modelling, and ease of development.</p>
+
+    <p>Topics of interest include, but are not limited to:</p>
+
+    <ul>
+      <li>Experimental evaluation of algorithms for
+        <ul>
+          <li>knowledge representation</li>
+          <li>automated reasoning</li>
+          <li>planning</li>
+          <li>scheduling</li>
+          <li>machine learning</li>
+          <li>model checking</li>
+          <li>boolean satisfiability (SAT)</li>
+          <li>constraint programming</li>
+          <li>argumentation</li>
+          <li>temporal reasoning</li>
+          <li>combinatorial optimization</li>
+          <li>quantified boolean formulae and quantified constraints</li>
+          <li>modal logics</li>
+          <li>logic programming</li>
+          <li>answer set programming</li>
+          <li>ontological reasoning</li>
+        </ul>
+      </li>
+      <li>Definition and construction of benchmarks</li>
+      <li>Experimentation methodologies</li>
+      <li>Metaheuristics</li>
+      <li>Algorithm hybridization</li>
+      <li>Static analysis of combinatorial problems</li>
+      <li>Languages and systems for definition and solution of problems</li>
+      <li>Comparisons between systems and algorithms</li>
+      <li>Application experiences (visualization, graphics, security, transports, …)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- WORKSHOP CHAIRS -->
+<section id="chairs">
+  <div class="wrap">
+    <h2>Workshop Chairs</h2>
+    <div class="people">
+      <p><strong>Alessandro Bertagnon</strong><br><span class="aff">University of Ferrara, Italy</span></p>
+      <p><strong>Marco Maratea</strong><br><span class="aff">University of Calabria, Italy</span></p>
+      <p><strong>Enrico Scala</strong><br><span class="aff">University of Brescia, Italy</span></p>
+      <p><strong>Luciano Serafini</strong><br><span class="aff">FBK, Italy</span></p>
+      <p><strong>Mauro Vallati</strong><br><span class="aff">University of Huddersfield, UK</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM COMMITTEE -->
+<section id="programCommittee">
+  <div class="wrap">
+    <h2>Program Committee</h2>
+    TBA
+    <!-- <div class="people">
+      <p><strong>Luigi Bonassi</strong><br><span class="aff">University of Oxford</span></p>
+      <p><strong>Stefania Constantini</strong><br><span class="aff">University of L'Aquila</span></p>
+      <p><strong>Carmine Dodaro</strong><br><span class="aff">University of Calabria</span></p>
+      <p><strong>Wolfgang Faber</strong><br><span class="aff">University of Klagenfurt</span></p>
+      <p><strong>Andrea Formisano</strong><br><span class="aff">University of Udine</span></p>
+      <p><strong>Leonardo Lamanna</strong><br><span class="aff">FBK</span></p>
+      <p><strong>Giuseppe Mazzotta</strong><br><span class="aff">University of Calabria</span></p>
+      <p><strong>Johannes P. Wallner</strong><br><span class="aff">Graz University of Technology</span></p>
+      <p><strong>Francesco Percassi</strong><br><span class="aff">University of Huddersfield</span></p>
+      <p><strong>Francesco Santini</strong><br><span class="aff">University of Perugia</span></p>
+      <p><strong>Valentino Santucci</strong><br><span class="aff">University for Foreigners of Perugia</span></p>
+      <p><strong>Ivan Serina</strong><br><span class="aff">University of Brescia</span></p>
+      <p><strong>Alice Tarzariol</strong><br><span class="aff">University of Klagenfurt</span></p>
+    </div> -->
+  </div>
+</section>
+
+<!-- SUBMISSION -->
+<section id="submission">
+  <div class="wrap">
+    <h2>Submission</h2>
+    <p>Authors are invited to submit either original and non-original papers.</p>
+    <p>Publications showing negative results are welcome, provided that the approach was original and very promising in principle, the experimentation was well-conducted, the results obtained were unforeseeable and gave important hints in the comprehension of the target problem, helping other researchers to avoid unsuccessful paths.</p>
+
+    <div class="note">
+      <strong>Workshop submissions must be in PDF format</strong>, do not exceed <strong>15 pages</strong> (full papers) or <strong>8 pages</strong> (short papers). Papers should be formatted according to the CEUR-WS single-column style — <a href="http://ceur-ws.org/HOWTOSUBMIT.html" target="_blank" rel="noopener">ceur-ws.org/HOWTOSUBMIT.html</a>.
+    </div>
+
+    <p>RCRA-it 2026 uses EasyChair for the submission of contributions. Contributions must be submitted through <a href="https://" target="_blank" rel="noopener">--- insert link---</insert></a>.</p>
+
+    <a href="https://" target="_blank" rel="noopener" class="submit-cta">Submit your paper →</a>
+  </div>
+</section>1
+
+<!-- PROCEEDINGS -->
+<section id="proceedings">
+  <div class="wrap">
+    <h2>Proceedings</h2>
+    <p>Accepted original papers will be published in the <a href="http://ceur-ws.org/" target="_blank" rel="noopener">CEUR Workshop Proceedings</a> (upon authors' confirmation), possibly in conjunction with other workshops.</p>
+    <p>Moreover, as in some previous editions, we are considering the possibility of having a special issue of an international journal, provided that a sufficient amount of high-quality papers is collected. All technical papers, original and non-original, will be eligible.</p>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section id="history">
+  <div class="wrap">
+    <h2>History of the recent workshop series</h2>
+    <ul class="history-list">
+      <li><span class="year">2026</span><span class="desc"><a href="https://rcra2026.github.io/">RCRA 2026</a> — affiliated with ICLP 2026, co-located with FLoC 2026 (Federated Logic Conference 2026), Lisbon, Portugal</span></li>
+      <li><span class="year">2025</span><span class="desc"><a href="https://rcra2025.wordpress.com/">RCRA 2025</a> — workshop of ICLP 2025, Rende, Italy</span></li>
+      <li><span class="year">2024</span><span class="desc"><a href="https://rcra2024.wordpress.com/">RCRA 2024</a> — workshop of AI*IA 2024, Bolzano, Italy</span></li>
+      <li><span class="year">2023</span><span class="desc"><a href="https://rcra2023.wordpress.com/">RCRA 2023</a> — workshop of AI*IA 2023, Rome, Italy</span></li>
+      <li><span class="year">2022</span><span class="desc"><a href="https://rcra2022.wordpress.com/">RCRA 2022</a> — workshop of LPNMR 2022, Genova, Italy</span></li>
+      <li><span class="year">2021</span><span class="desc"><a href="https://rcra2021.wordpress.com/">RCRA 2021</a> — workshop of AI*IA 2021, Virtual</span></li>
+      <li><span class="year">2020</span><span class="desc">RCRA 2020 — workshop of AI*IA 2020, Virtual</span></li>
+      <li><span class="year">2018</span><span class="desc">RCRA 2018 — workshop of FLoC 2018, Oxford, UK<span class="extra">Extended versions of the best papers appeared in a special issue of <em>Fundamenta Informaticae</em></span></span></li>
+      <li><span class="year">2017</span><span class="desc">RCRA 2017 — workshop of AI*IA 2017, Bari, Italy<span class="extra">Special issue of <em>Fundamenta Informaticae</em></span></span></li>
+      <li><span class="year">2016</span><span class="desc">RCRA 2016 — workshop of AI*IA 2016, Genova, Italy<span class="extra">Special issue of <em>JETAI</em></span></span></li>
+      <li><span class="year">2015</span><span class="desc">RCRA 2015 — workshop of AI*IA 2015, Ferrara, Italy<span class="extra">Special issue of <em>Fundamenta Informaticae</em></span></span></li>
+      <li><span class="year">2014</span><span class="desc">RCRA 2014 — workshop of SAT, IJCAR and ICLP 2014, Vienna, Austria<span class="extra">Special issue of <em>AI Communications</em></span></span></li>
+      <li><span class="year">…</span><span class="desc">Previous editions: <a href="http://rcra.aixia.it/workshops">rcra.aixia.it/workshops</a></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    RCRA-it 2026 Workshop · <a href="https://rcra.aixia.it/" target="_blank" rel="noopener">rcra.aixia.it</a>
+  </div>
+</footer>
+
+<!-- Tweaks mount -->
+<div id="tweaks-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks.jsx"></script>
+</body>
+</html>
