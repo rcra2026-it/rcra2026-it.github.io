@@ -190,6 +190,68 @@
   .dates .event .label { font-weight: 600; }
   .dates .event .when { font-weight: 600; }
 
+  /* agenda */
+  .agenda-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+    max-width: 820px;
+    margin-bottom: 22px;
+  }
+  .agenda-header h2 { margin-bottom: 0; }
+  .agenda-date {
+    color: var(--muted);
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+  }
+  .agenda-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 820px;
+    border-top: 1px solid var(--rule);
+  }
+  .agenda-item {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .agenda-time {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .agenda-title {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16.5px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .agenda-authors {
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  .agenda-item--service .agenda-title {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  @media (max-width: 560px) {
+    .agenda-item {
+      grid-template-columns: 1fr;
+      gap: 5px;
+      padding: 17px 0;
+    }
+  }
+
   /* people */
   .people {
     display: grid;
@@ -272,6 +334,7 @@
   <div class="wrap nav-inner">
     <a class="brand" href="#top">RCRA-it 2026</a>
     <div class="nav-links">
+      <a href="#agenda">Agenda</a>
       <a href="#dates">Important Dates</a>
       <a href="#submission">Submission</a>
       <a href="#proceedings">Proceedings</a>
@@ -285,7 +348,7 @@
     <div class="hero-kicker">RCRA-it · 2026</div>
     <h1>Italian Workshop on Experimental Evaluation of Algorithms for Solving Problems with Combinatorial Explosion</h1>
     <div class="hero-meta">
-      <span>TBA</span>
+      <span>October 9, 2026</span>
       <span class="sep">/</span>
       <span>Co-located with AIxIA 2026</span>
       <span class="sep">/</span>
@@ -324,16 +387,79 @@
 
       <div class="label">Notification of acceptance</div>
       <!-- <div class="when"><del>May 20</del><span class="new">May 29, 2026</span></div> -->
-      <div class="when"><del>August 27</del><span class="new">September 2, 2026</span></div>
+      <div class="when"><del>August 27</del><span class="new">September 1, 2026</span></div>
       <hr class="rowline">
 
       <div class="label">Final version of accepted original papers</div>
-      <div class="when">September 15, 2026</div>
+      <div class="when">September 20, 2026</div>
       <hr class="rowline">
 
       <div class="label event"><span class="label">RCRA-it Workshop</span></div>
-      <div class="when event">TBA</div>
+      <div class="when event">October 9, 2026</div>
     </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda">
+  <div class="wrap">
+    <div class="agenda-header">
+      <h2>Agenda</h2>
+      <div class="agenda-date">October 9, 2026 · 09:00–11:00</div>
+    </div>
+
+    <ol class="agenda-list">
+      <li class="agenda-item agenda-item--service">
+        <span class="agenda-time">09:00–09:15</span>
+        <div><span class="agenda-title">Opening</span></div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-time">09:15–09:30</span>
+        <div>
+          <span class="agenda-title">Taming the Plotting Grid Puzzle via Numeric Planning</span>
+          <div class="agenda-authors">Veronica De Bastiani, Antonio Rodofili, Francesco Doria, Matteo Paparo, Marco Maratea and Mauro Vallati</div>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-time">09:30–09:45</span>
+        <div>
+          <span class="agenda-title">Temporal Deontic Conditional Answer Set Programming with Typicality</span>
+          <div class="agenda-authors">Mario Alviano, Laura Giordano and Daniele Theseider Dupré</div>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-time">09:45–10:00</span>
+        <div>
+          <span class="agenda-title">Recent Advances in 2-ASP(Q) Solving</span>
+          <div class="agenda-authors">Andrea Cuteri and Giuseppe Mazzotta</div>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-time">10:00–10:15</span>
+        <div>
+          <span class="agenda-title">Pharmacy Duty Rotation Scheduling via Answer Set Programming</span>
+          <div class="agenda-authors">Francesco Benedetto Giulino, Marco Maratea, Cinzia Marte, Simona Mirarchi and Orlando Sgro</div>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-time">10:15–10:30</span>
+        <div>
+          <span class="agenda-title">ASP-based Unsatisfiable Cores Extraction for LTLf</span>
+          <div class="agenda-authors">Antonio Ielo</div>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-time">10:30–10:45</span>
+        <div>
+          <span class="agenda-title">Trust-Regulated Mental and Practical Actions in a Dynamic Epistemic Framework for Multi-Agent Systems</span>
+          <div class="agenda-authors">Valentina Pitoni and Stefania Costantini</div>
+        </div>
+      </li>
+      <li class="agenda-item agenda-item--service">
+        <span class="agenda-time">10:45–11:00</span>
+        <div><span class="agenda-title">Closing</span></div>
+      </li>
+    </ol>
   </div>
 </section>
 
